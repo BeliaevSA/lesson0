@@ -23,7 +23,7 @@ def password_selection(n):
                 continue
 
     sorted_password = []
-    for i in range(len(password) // 2 + 1):
+    for i in range(len(password)):
         for j in range(len(password)):
             if password[j][0] == str(i + 1):
                 sorted_password.append(password[j])
