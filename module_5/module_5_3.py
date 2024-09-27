@@ -23,6 +23,8 @@ class House:
     def __eq__(self, other):
         if isinstance(other, House):
             return self.numbers_of_floors == other.numbers_of_floors
+        elif isinstance(other, int):
+            return self.numbers_of_floors == other
         else:
             return False
 
@@ -30,6 +32,8 @@ class House:
     def __lt__(self, other):
         if isinstance(other, House):
             return self.numbers_of_floors < other.numbers_of_floors
+        elif isinstance(other, int):
+            return self.numbers_of_floors < other
         else:
             return False
 
@@ -37,6 +41,8 @@ class House:
     def __le__(self, other):
         if isinstance(other, House):
             return self.numbers_of_floors <= other.numbers_of_floors
+        elif isinstance(other, int):
+            return self.numbers_of_floors <= other
         else:
             return False
 
@@ -44,6 +50,8 @@ class House:
     def __gt__(self, other):
         if isinstance(other, House):
             return self.numbers_of_floors > other.numbers_of_floors
+        elif isinstance(other, int):
+            return self.numbers_of_floors > other
         else:
             return False
 
@@ -51,6 +59,8 @@ class House:
     def __ge__(self, other):
         if isinstance(other, House):
             return self.numbers_of_floors >= other.numbers_of_floors
+        elif isinstance(other, int):
+            return self.numbers_of_floors >= other
         else:
             return False
 
@@ -58,6 +68,8 @@ class House:
     def __ne__(self, other):
         if isinstance(other, House):
             return self.numbers_of_floors != other.numbers_of_floors
+        elif isinstance(other, int):
+            return self.numbers_of_floors != other
         else:
             return False
 
@@ -65,6 +77,8 @@ class House:
     def __add__(self, value):
         if isinstance(value, int):
             self.numbers_of_floors += value
+        if isinstance(value, House):
+            self.numbers_of_floors += value.numbers_of_floors
         return self
 
 
