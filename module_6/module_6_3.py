@@ -17,17 +17,26 @@ class Horse(Eagle):
         else:
             return self.sound
 
+
     def run(self, dx: int):
         self.x_distance += dx
         return self.x_distance
 
 
 class Pegasus(Horse, Eagle):
+    def __init__(self):
+        super().x_distance
+        super().y_distance
+        super().get_sound
+
+
     def voice(self):
         print(super().get_sound())
 
+
     def move(self, dx: int, dy: int):
         (self.run(dx), self.fly(dy))
+
 
     def get_pos(self):
         return (self.x_distance, self.y_distance)
