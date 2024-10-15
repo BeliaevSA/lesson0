@@ -1,10 +1,13 @@
-class Figure:
+import math
+from turtledemo.sorting_animate import ssort
 
-    def __init__(self):
-        self.__sides = []
-        self.__color = [255, 255, 255]
+
+class Figure:
+    def __init__(self, color, sides):
+        self.__sides = sides
+        self.__color = list(color)
         self.filled = None
-        sides_count = 0
+        self.sides_count = 0
 
 
     def get_color(self):
@@ -14,7 +17,7 @@ class Figure:
     def __is_valid_color(self, r, g, b):
         values = [r, g, b]
         for value in values:
-            if isinstance(value, int) and value < 0 and value > 255:
+            if isinstance(value, int) and not 0 <= value <= 255:
                 return False
         return True
 
@@ -27,22 +30,78 @@ class Figure:
     def __is_valid_sides(self, *sides):
         if len(sides) != self.sides_count:
             return False
-        # for value in sides:
+        for value in sides:
+            if not isinstance(value, int) and value <= 0:
+                return False
+        return True
 
+
+    def get_sides(self):
+        return self.__sides
+
+
+    def __len__(self):
+        return sum(self.__sides)
+
+
+    def set_sides(self, *new_sides):
+        if len(new_sides) != self.sides_count:
+            return
+        else:
+            self.__sides = list(new_sides)
 
 
 class Circle(Figure):
-    pass
+    def __init__(self, color, *sides):
+        super().__init__(color, list(sides))
+        self.sides_count = 1
+        self.__radius = int(self.get_sides()[0]) / 2 * math.pi
+
+
+    def get_square(self):
+        sides = self.get_sides()
+        return sides[0] / math.pi\
 
 
 class Triangle(Figure):
-    pass
+    def __init__(self, color, *sides):
+        super().__init__(color, list(sides))
+        self.sides_count = 3
+
+
+    def get_square(self):
+        a, b, c = self.get_sides()
+        return math.sqrt(math.pi * (math.pi - a) * (math.pi - b) * (math.pi - c))
 
 
 class Cube(Figure):
-    pass
+    def __init__(self, color, *sides):
+        super().__init__(color, list(sides))
+        self.sides_count = 12
+        self.set_sides(*([self.get_sides()[0]] * 12))
 
-figure1 = Figure()
-print(dir(figure1))
-print(figure1.filled)
-print(figure1._Figure__is_valid_sides(1, 2, 3))
+
+    def get_volume(self):
+        return math.ceil(math.pow(self.get_sides()[0], 3))
+
+
+circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
+cube1 = Cube((222, 35, 130), 6)
+
+# Проверка на изменение цветов:
+circle1.set_color(55, 66, 77) # Изменится
+print(circle1.get_color())
+cube1.set_color(300, 70, 15) # Не изменится
+print(cube1.get_color())
+
+# Проверка на изменение сторон:
+cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
+print(cube1.get_sides())
+circle1.set_sides(15) # Изменится
+print(circle1.get_sides())
+
+# Проверка периметра (круга), это и есть длина:
+print(len(circle1))
+
+# Проверка объёма (куба):
+print(cube1.get_volume())
