@@ -1,6 +1,4 @@
 import math
-from turtledemo.sorting_animate import ssort
-
 
 class Figure:
     def __init__(self, color, sides):
