@@ -3,7 +3,7 @@ import time
 
 def write_words(word_count, file_name):
   for i in range(1, word_count+1):
-    with open(file_name, 'a') as file:
+    with open(file_name, 'a', encoding='utf-8') as file:
       file.write(f'Какое-то слово №{i}\n')
     time.sleep(0.1)
   print(f'Завершилась запись в файл {file_name}')
