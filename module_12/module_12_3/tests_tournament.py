@@ -1,5 +1,5 @@
 import unittest
-from module_12.module_12_2.module_12_2 import Runner, Tournament
+from module_12_3 import Runner, Tournament
 
 
 class TournamentTest(unittest.TestCase):
