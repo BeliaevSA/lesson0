@@ -1,0 +1,32 @@
+2024-12-10 02:46:40,391 | WARNING | Неверный тип данных для объекта Runner
+Traceback (most recent call last):
+  File "C:\Users\belia\PycharmProjects\lessonPython\module_12\module_12_4\test_12_4.py", line 27, in test_run
+    runner = Runner(77, 20)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\belia\PycharmProjects\lessonPython\module_12\module_12_4\module_12_4.py", line 6, in __init__
+    raise TypeError(f'Имя может быть только строкой, передано {type(name).__name__}')
+TypeError: Имя может быть только строкой, передано int
+2024-12-10 02:46:40,393 | WARNING | Неверная скорость для Runner
+Traceback (most recent call last):
+  File "C:\Users\belia\PycharmProjects\lessonPython\module_12\module_12_4\test_12_4.py", line 16, in test_walk
+    runner = Runner('Test name', -10)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\belia\PycharmProjects\lessonPython\module_12\module_12_4\module_12_4.py", line 11, in __init__
+    raise ValueError(f'Скорость не может быть отрицательной, сейчас {speed}')
+ValueError: Скорость не может быть отрицательной, сейчас -10
+2024-12-10 02:47:27,194 | WARNING | Неверный тип данных для объекта Runner
+Traceback (most recent call last):
+  File "C:\Users\belia\PycharmProjects\lessonPython\module_12\module_12_4\test_12_4.py", line 27, in test_run
+    runner = Runner(77, 20)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\belia\PycharmProjects\lessonPython\module_12\module_12_4\module_12_4.py", line 6, in __init__
+    raise TypeError(f'Имя может быть только строкой, передано {type(name).__name__}')
+TypeError: Имя может быть только строкой, передано int
+2024-12-10 02:47:27,195 | WARNING | Неверная скорость для Runner
+Traceback (most recent call last):
+  File "C:\Users\belia\PycharmProjects\lessonPython\module_12\module_12_4\test_12_4.py", line 16, in test_walk
+    runner = Runner('Test name', -10)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\belia\PycharmProjects\lessonPython\module_12\module_12_4\module_12_4.py", line 11, in __init__
+    raise ValueError(f'Скорость не может быть отрицательной, сейчас {speed}')
+ValueError: Скорость не может быть отрицательной, сейчас -10
