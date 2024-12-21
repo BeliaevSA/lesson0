@@ -4,7 +4,8 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message
+from aiogram.types import Message, KeyboardButton
+from aiogram.utils.keyboard import ReplyKeyboardMarkup
 from module_13.config import TOKEN
 
 bot = Bot(token=TOKEN)
@@ -16,12 +17,20 @@ class UserState(StatesGroup):
     weight =State()
 
 
+keyboard_start = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text='Рассчитать'), KeyboardButton(text='Информация')]
+    ],
+    resize_keyboard=True
+)
+
+
 @dp.message(CommandStart())
-async def cmd_start(message: Message):
-    await message.answer('Привет! Я бот помогающий твоему здоровью.')
+async def start_message(message: Message):
+    await message.reply('Привет! Я бот помогающий твоему здоровью.',  reply_markup=keyboard_start)
 
 
-@dp.message(F.text.lower() == 'calories'.lower())
+@dp.message(F.text == 'Рассчитать')
 async def set_age(message: Message, state: FSMContext):
     await state.set_state(UserState.age)
     await message.answer("Введите свой возраст:")
