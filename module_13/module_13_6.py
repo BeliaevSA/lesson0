@@ -5,19 +5,21 @@ from aiogram.filters import Command, CommandStart
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
-from aiogram.utils.callback_answer import CallbackAnswer
 from aiogram.utils.keyboard import ReplyKeyboardMarkup
 from module_13.config import TOKEN
 
+# Инициализация бота и создание диспетчера
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
+# Создание состояния пользователя
 class UserState(StatesGroup):
     age = State()
     growth = State()
     weight =State()
 
 
+# Создание меню клавиатуры
 keyboard_start = ReplyKeyboardMarkup(
     keyboard=[
         [KeyboardButton(text='Рассчитать'), KeyboardButton(text='Информация')]
@@ -25,7 +27,7 @@ keyboard_start = ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
-
+# Создание инлайн клавиатур
 inline_keyboard = InlineKeyboardMarkup(
     inline_keyboard=[
         [
@@ -41,17 +43,19 @@ inline_keyboard_back = InlineKeyboardMarkup(
     ]
 )
 
+# Обработчик команды /start
 @dp.message(CommandStart())
 async def start_message(message: Message):
     await message.reply('Привет! Я бот помогающий твоему здоровью.',  reply_markup=keyboard_start)
 
 
+# Обработчик сообщения
 @dp.message(F.text == 'Рассчитать')
 async def main_menu(message):
     await message.reply(text='Выберите опцию', reply_markup=inline_keyboard)
 
 
-
+# Обработчик инлайн кнопки
 @dp.callback_query(F.data == 'formulas')
 async def get_formulas(callback: CallbackQuery):
     await callback.answer('')
@@ -71,6 +75,7 @@ async def set_age(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer(text="Введите свой возраст:")
 
 
+# Обработчик изменения состояния age
 @dp.message(UserState.age)
 async def set_growth(message: Message, state: FSMContext):
     await state.update_data(age = message.text)
@@ -78,6 +83,7 @@ async def set_growth(message: Message, state: FSMContext):
     await message.answer('Введите свой рост:')
 
 
+# Обработчик изменения состояния growth
 @dp.message(UserState.growth)
 async def set_weight(message: Message, state: FSMContext):
     await state.update_data(growth = message.text)
@@ -85,6 +91,7 @@ async def set_weight(message: Message, state: FSMContext):
     await message.answer('Введите свой вес:')
 
 
+# Обработчик изменения состояния weight
 @dp.message(UserState.weight)
 async def send_calories(message: Message, state: FSMContext):
     await state.update_data(weight = message.text)
@@ -96,7 +103,6 @@ async def send_calories(message: Message, state: FSMContext):
 
 
 async def main():
-
     await dp.start_polling(bot)
 
 
