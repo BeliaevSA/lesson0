@@ -6,6 +6,8 @@ from aiogram.filters import Command, CommandStart
 from aiogram.types import Message, CallbackQuery
 
 from config import *
+from admin import *
+from db import *
 import texts
 from keyboards import *
 
